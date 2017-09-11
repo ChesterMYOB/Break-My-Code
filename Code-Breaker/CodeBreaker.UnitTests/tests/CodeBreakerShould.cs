@@ -45,10 +45,19 @@ namespace CodeBreaker.UnitTests.tests
         [Test]
         public void ThrowExceptionWhenGuessLengthDoesNotMatchCodeLength()
         {
-            var codeBreaker = new CodeBreaker("a", "b", "c", "d");
+            var codeBreaker = new CodeBreaker();
             var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<string>{"a"}));
             Assert.That(exception.Message, Is.EqualTo("Incorrect guess length!"));
         }
-        
+
+
+        [Test]
+        public void ReturnMarkWhenCodeBreakerHasDuplicateColours()
+        {
+            var codeBreaker = new CodeBreaker("g", "g", "b", "b");
+            var mark = codeBreaker.CheckGuess(new List<string> { "g", "b", "w", "w" });
+            Assert.AreEqual("bw", mark);
+        }
+
     }
 }
