@@ -30,6 +30,11 @@ namespace CodeBreaker.UnitTests
         }
         public string CheckGuess(List<string> guess)
         {
+            if (guess.Count != _code.Count)
+            {
+                throw new GuessLengthException("Incorrect guess length!");
+            }
+
             var mark = "";
 
             for (int i = 0; i < guess.Count; i++)

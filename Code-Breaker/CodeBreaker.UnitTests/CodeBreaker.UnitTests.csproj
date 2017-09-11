@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="src\CodeBreaker.cs" />
     <Compile Include="src\Colour.cs" />
+    <Compile Include="src\GuessLengthException.cs" />
     <Compile Include="tests\CodeBreakerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

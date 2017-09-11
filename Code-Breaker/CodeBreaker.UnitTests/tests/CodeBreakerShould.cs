@@ -31,7 +31,7 @@ namespace CodeBreaker.UnitTests.tests
             new object[] {"wwww", new List<string> {"c", "r", "g", "y"}},
             new object[] {"bwww", new List<string> {"y", "r", "g", "c"}},
             new object[] {"bbww", new List<string> {"r", "g", "c", "y"}},
-            new object[] {"bbbb", new List<string>{"r", "g", "y", "c"}}
+            new object[] {"bbbb", new List<string>{"r", "g", "y", "c"}},
         };
 
         [Test, TestCaseSource(nameof(CheckForCorrectGuessCases))]
@@ -42,7 +42,13 @@ namespace CodeBreaker.UnitTests.tests
             Assert.AreEqual(expected, mark);
         }
 
-       
+        [Test]
+        public void ThrowExceptionWhenGuessLengthDoesNotMatchCodeLength()
+        {
+            var codeBreaker = new CodeBreaker("a", "b", "c", "d");
+            var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<string>{"a"}));
+            Assert.That(exception.Message, Is.EqualTo("Incorrect guess length!"));
+        }
         
     }
 }
