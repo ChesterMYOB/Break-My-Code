@@ -13,7 +13,9 @@ namespace CodeBreaker.UnitTests.tests
         private static readonly object[] CheckForCorrectGuessCases =
         {
             new object[] {"bbbb", new List<string>{"r", "g", "y", "c"}},
-            new object[] {"", new List<string> {"w", "w", "w", "w"}}
+            new object[] {"", new List<string> {"w", "w", "w", "w"}},
+            new object[] {"bbww", new List<string> {"r", "g", "c", "y"}},
+            new object[] {"bbww", new List<string> {"r", "c", "y", "g"}}
         };
 
         [Test, TestCaseSource(nameof(CheckForCorrectGuessCases))]
