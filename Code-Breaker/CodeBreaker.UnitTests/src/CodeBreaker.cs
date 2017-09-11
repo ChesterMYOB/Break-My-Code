@@ -37,6 +37,7 @@ namespace CodeBreaker.UnitTests
                 if (guess[i].Equals(_code[i]))
                 {
                     mark = "b" + mark;
+                    _code[i] = "";
                 }
                 else
                 {
