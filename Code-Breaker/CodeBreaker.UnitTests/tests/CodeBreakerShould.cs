@@ -12,33 +12,33 @@ namespace CodeBreaker.UnitTests.tests
     {
         private static readonly object[] CheckForCorrectGuessCases =
         {
-            new object[] {"", new List<string> {"w", "w", "w", "w"}},
-            new object[] {"bbww", new List<string> {"r", "c", "y", "g"}},
-            new object[] {"b", new List<string> {"r", "r", "w", "w"}},
+            new object[] {"", Colour.White, Colour.White, Colour.White, Colour.White},
+            new object[] {"bbww", Colour.Red, Colour.Cyan, Colour.Yellow, Colour.Green},
+            new object[] {"b", Colour.Red, Colour.Red, Colour.White, Colour.White},
 
-            new object[] {"w", new List<string> {"w", "w", "r", "w"}},
-            new object[] {"b", new List<string> {"r", "w", "w", "w"}},
+            new object[] {"w", Colour.White, Colour.White, Colour.Red, Colour.White},
+            new object[] {"b", Colour.Red, Colour.White, Colour.White, Colour.White},
 
-            new object[] {"ww", new List<string> {"g", "w", "c", "w"}},
-            new object[] {"bw", new List<string> {"w", "r", "w", "c"}},
-            new object[] {"bb", new List<string> {"w", "g", "w", "c"}},
+            new object[] {"ww", Colour.Green, Colour.White, Colour.Cyan, Colour.White},
+            new object[] {"bw", Colour.White, Colour.Red, Colour.White, Colour.Cyan},
+            new object[] {"bb", Colour.White, Colour.Green, Colour.White, Colour.Cyan},
 
-            new object[] {"www", new List<string> {"w", "r", "g", "y"}},
-            new object[] {"bww", new List<string> {"w", "r", "g", "c"}},
-            new object[] {"bbw", new List<string> {"w", "r", "y", "c"}},
-            new object[] {"bbb", new List<string> {"w", "g", "y", "c"}},
+            new object[] {"www", Colour.White, Colour.Red, Colour.Green, Colour.Yellow},
+            new object[] {"bww", Colour.White, Colour.Red, Colour.Green, Colour.Cyan},
+            new object[] {"bbw", Colour.White, Colour.Red, Colour.Yellow, Colour.Cyan},
+            new object[] {"bbb", Colour.White, Colour.Green, Colour.Yellow, Colour.Cyan},
 
-            new object[] {"wwww", new List<string> {"c", "r", "g", "y"}},
-            new object[] {"bwww", new List<string> {"y", "r", "g", "c"}},
-            new object[] {"bbww", new List<string> {"r", "g", "c", "y"}},
-            new object[] {"bbbb", new List<string>{"r", "g", "y", "c"}},
+            new object[] {"wwww", Colour.Cyan, Colour.Red, Colour.Green, Colour.Yellow},
+            new object[] {"bwww", Colour.Yellow, Colour.Red, Colour.Green, Colour.Cyan},
+            new object[] {"bbww", Colour.Red, Colour.Green, Colour.Cyan, Colour.Yellow},
+            new object[] {"bbbb", Colour.Red, Colour.Green, Colour.Yellow, Colour.Cyan}
         };
 
         [Test, TestCaseSource(nameof(CheckForCorrectGuessCases))]
-        public void CheckForCorrectGuess(string expected, List<string> guess)
+        public void CheckForCorrectGuess(string expected, Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
         {
             var codeBreaker = new CodeBreaker();
-            var mark = codeBreaker.CheckGuess(guess);
+            var mark = codeBreaker.CheckGuess(new List<Colour> { codeOne, codeTwo, codeThree, codeFour });
             Assert.AreEqual(expected, mark);
         }
 
@@ -46,7 +46,7 @@ namespace CodeBreaker.UnitTests.tests
         public void ThrowExceptionWhenGuessLengthDoesNotMatchCodeLength()
         {
             var codeBreaker = new CodeBreaker();
-            var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<string>{"a"}));
+            var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<Colour>{Colour.Red}));
             Assert.That(exception.Message, Is.EqualTo("Incorrect guess length!"));
         }
 
@@ -54,8 +54,8 @@ namespace CodeBreaker.UnitTests.tests
         [Test]
         public void ReturnMarkWhenCodeBreakerHasDuplicateColours()
         {
-            var codeBreaker = new CodeBreaker("g", "g", "b", "b");
-            var mark = codeBreaker.CheckGuess(new List<string> { "g", "b", "w", "w" });
+            var codeBreaker = new CodeBreaker(Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan);
+            var mark = codeBreaker.CheckGuess(new List<Colour> { Colour.Green, Colour.Cyan, Colour.White, Colour.White });
             Assert.AreEqual("bw", mark);
         }
 
