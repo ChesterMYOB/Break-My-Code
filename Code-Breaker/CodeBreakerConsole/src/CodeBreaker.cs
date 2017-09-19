@@ -6,7 +6,8 @@ namespace CodeBreakerConsole
 {
     public class CodeBreaker
     {
-        private readonly List<Colour> _code;
+        private List<Colour> _code;
+        private readonly int _codeSize;
 
         public CodeBreaker()
         {
@@ -17,6 +18,12 @@ namespace CodeBreakerConsole
                 Colour.Yellow,
                 Colour.Cyan
             };
+        }
+
+        public CodeBreaker(int codeSize)
+        {
+            _codeSize = codeSize;
+            GenerateRandomCode();
         }
 
         public CodeBreaker(Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
@@ -57,5 +64,18 @@ namespace CodeBreakerConsole
             }
             return mark;
         }
-    }
+
+        private void GenerateRandomCode()
+        {
+            var random = new Random();
+            _code = new List<Colour>(_codeSize);
+
+            for (int i = 0; i < _codeSize; i++)
+            {
+                var v = Enum.GetValues(typeof(Colour));
+                var colourAsInt = random.Next(1, v.Length);
+                _code.Add((Colour)colourAsInt);
+            }
+        }
+    } 
 }

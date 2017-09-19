@@ -7,12 +7,12 @@ namespace CodeBreakerConsole
     // Is it okay to have an empty enum?
     public enum Colour
     {
-        Empty = -1,
-        Red = 'r',
-        Green = 'g',
-        Yellow = 'y',
-        Cyan = 'c',
-        White = 'w'
+        Empty,
+        Red,
+        Green,
+        Yellow,
+        Cyan,
+        White
     }
 
     public enum Peg
