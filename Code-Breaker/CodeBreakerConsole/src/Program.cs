@@ -10,7 +10,9 @@ namespace CodeBreakerConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("TEST");
+            CodeBreaker codeBreaker = new CodeBreaker();
+
+            Console.WriteLine("Enter in your guess: ");
         }
     }
 }

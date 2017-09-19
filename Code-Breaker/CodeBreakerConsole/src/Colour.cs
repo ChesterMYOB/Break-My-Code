@@ -1,7 +1,8 @@
 ﻿using System.Runtime.Remoting.Messaging;
 using CodeBreaker.UnitTests;
+using CodeBreakerConsole;
 
-namespace CodeBreaker.UnitTests
+namespace CodeBreakerConsole
 {
     // Is it okay to have an empty enum?
     public enum Colour

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using CodeBreaker.UnitTests;
 
-namespace CodeBreaker.UnitTests
+namespace CodeBreakerConsole
 {
     public class CodeBreaker
     {
