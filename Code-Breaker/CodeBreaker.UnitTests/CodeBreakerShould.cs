@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using CodeBreakerConsole;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using Assert = NUnit.Framework.Assert;
 
-namespace CodeBreaker.UnitTests.tests
+namespace CodeBreaker.UnitTests
 {
     [TestFixture]
     public class CodeBreakerShould
@@ -37,7 +35,7 @@ namespace CodeBreaker.UnitTests.tests
         [Test, TestCaseSource(nameof(CheckForCorrectGuessCases))]
         public void CheckForCorrectGuess(string expected, Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
         {
-            var codeBreaker = new CodeBreaker();
+            var codeBreaker = new CodeBreakerConsole.CodeBreaker();
             var mark = codeBreaker.CheckGuess(new List<Colour> { codeOne, codeTwo, codeThree, codeFour });
             Assert.AreEqual(expected, mark);
         }
@@ -45,7 +43,7 @@ namespace CodeBreaker.UnitTests.tests
         [Test]
         public void ThrowGuessLengthException_WhenGuessLengthDoesNotMatchCodeLength()
         {
-            var codeBreaker = new CodeBreaker();
+            var codeBreaker = new CodeBreakerConsole.CodeBreaker();
             var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<Colour>{Colour.Red}));
             Assert.That(exception.Message, Is.EqualTo("Incorrect guess length!"));
         }
@@ -61,7 +59,7 @@ namespace CodeBreaker.UnitTests.tests
         [Test, TestCaseSource(nameof(CheckForRandomGuessLengthCases))]
         public void CheckForRandomGuessLength(string expected, List<Colour> guess, List<Colour> code)
         {
-            var codeBreaker = new CodeBreaker(code);
+            var codeBreaker = new CodeBreakerConsole.CodeBreaker(code);
             var mark = codeBreaker.CheckGuess(guess);
             Assert.AreEqual(expected, mark);
         }
