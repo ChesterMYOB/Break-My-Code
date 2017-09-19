@@ -51,16 +51,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\CodeBreaker.cs" />
-    <Compile Include="src\Colour.cs" />
-    <Compile Include="src\GuessLengthException.cs" />
-    <Compile Include="tests\CodeBreakerShould.cs" />
+    <Compile Include="CodeBreakerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CodeBreakerConsole\CodeBreakerConsole.csproj">
+      <Project>{ace1da1f-fa70-422f-96bb-e4a0a513be8d}</Project>
+      <Name>CodeBreakerConsole</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
