@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+using CodeBreaker.UnitTests.src;
 
 namespace CodeBreaker.UnitTests
 {
@@ -9,25 +8,20 @@ namespace CodeBreaker.UnitTests
     {
         private readonly List<Colour> _code;
 
-        public CodeBreaker()
-        {
-            _code = new List<Colour>
-            {
-                Colour.Red,
-                Colour.Green,
-                Colour.Yellow,
-                Colour.Cyan
-            };
-        }
-
-        public CodeBreaker(Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
-        {
-            _code = new List<Colour> { codeOne, codeTwo, codeThree, codeFour};
+        public CodeBreaker() {
+            _code = new List<Colour> { Colour.Red, Colour.Green, Colour.Yellow, Colour.Cyan };
         }
 
         public CodeBreaker(List<Colour> code)
         {
             _code = code;
+        }
+
+        public CodeBreaker(params Colour[] codeColours)
+        {
+            var list = new List<Colour>();
+            list.AddRange(codeColours);
+            _code = list;
         }
 
         public string CheckGuess(List<Colour> guess)
@@ -36,23 +30,22 @@ namespace CodeBreaker.UnitTests
                 throw new ArgumentException("Cannot have an empty colour in guess");
 
             if (guess.Count != _code.Count)         
-                throw new GuessLengthException("Incorrect guess length!");
+                throw new ArgumentException("Guess length does not match code length");
             
-
             var mark = "";
 
-            for (int i = 0; i < guess.Count; i++)
+            for (int position = 0; position < guess.Count; position++)
             {
-                if (guess[i].Equals(_code[i]))
+                if (guess[position].Equals(_code[position]))
                 {
-                    mark = Peg.Black.ToFriendlyString() + mark;
-                    _code[i] = Colour.Empty;
+                    mark = Peg.Black.ToPegString() + mark;
+                    _code[position] = Colour.Empty;
                 }
                 else
                 {
-                    if (_code.Contains(guess[i]))
+                    if (_code.Contains(guess[position]))
                     {
-                        mark += Peg.White.ToFriendlyString();
+                        mark += Peg.White.ToPegString();
                     }
                 }
             }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using Assert = NUnit.Framework.Assert;
 
 namespace CodeBreaker.UnitTests.tests
 {
     [TestFixture]
-    public class CodeBreakerShould
+    public class CodeBerakerShould
     {
         private static readonly object[] CheckForCorrectGuessCases =
         {
@@ -46,8 +44,8 @@ namespace CodeBreaker.UnitTests.tests
         public void ThrowGuessLengthException_WhenGuessLengthDoesNotMatchCodeLength()
         {
             var codeBreaker = new CodeBreaker();
-            var exception = Assert.Throws<GuessLengthException>(() => codeBreaker.CheckGuess(new List<Colour>{Colour.Red}));
-            Assert.That(exception.Message, Is.EqualTo("Incorrect guess length!"));
+            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour>{Colour.Red}));
+            Assert.That(exception.Message, Is.EqualTo("Guess length does not match code length"));
         }
 
 
