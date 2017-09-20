@@ -40,28 +40,35 @@ namespace CodeBreaker.UnitTests.tests
             Assert.AreEqual(expected, mark);
         }
 
-        [Test]
-        public void ThrowGuessLengthException_WhenGuessLengthDoesNotMatchCodeLength()
-        {
-            var codeBreaker = new CodeBreaker();
-            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour>{Colour.Red}));
-            Assert.That(exception.Message, Is.EqualTo("Guess length does not match code length"));
-        }
-
-
-        private static readonly object[] CheckForRandomGuessLengthCases =
-        {
+        private static readonly object[] CheckForCorrectGuessWithVariableGuessLengthCases =
+{
             new object[] {"bbbbb", new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }},
             new object[] {"bbb",  new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }},
-           
+
         };
 
-        [Test, TestCaseSource(nameof(CheckForRandomGuessLengthCases))]
-        public void CheckForRandomGuessLength(string expected, List<Colour> guess, List<Colour> code)
+        [Test, TestCaseSource(nameof(CheckForCorrectGuessWithVariableGuessLengthCases))]
+        public void CheckForCorrectGuess_WithVariableGuessLengths(string expected, List<Colour> guess, List<Colour> code)
         {
             var codeBreaker = new CodeBreaker(code);
             var mark = codeBreaker.CheckGuess(guess);
             Assert.AreEqual(expected, mark);
+        }
+
+        [Test]
+        public void ThrowArgumentExceptionWithCorrectMessage_WhenGuessLengthDoesNotMatchCodeLength()
+        {
+            var codeBreaker = new CodeBreaker();
+            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Red }));
+            Assert.That(exception.Message, Is.EqualTo("Guess length does not match code length"));
+        }
+
+        [Test]
+        public void ThrowArgumentExceptionWithCorrectMessage_WhenGuessLengthContainsEmpty()
+        {
+            var codeBreaker = new CodeBreaker();
+            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Red, Colour.Empty }));
+            Assert.That(exception.Message, Is.EqualTo("Cannot have an empty colour in guess"));
         }
     }
 }

@@ -17,13 +17,6 @@ namespace CodeBreaker.UnitTests
             _code = code;
         }
 
-        public CodeBreaker(params Colour[] codeColours)
-        {
-            var list = new List<Colour>();
-            list.AddRange(codeColours);
-            _code = list;
-        }
-
         public string CheckGuess(List<Colour> guess)
         {
             if (guess.Contains(Colour.Empty))
