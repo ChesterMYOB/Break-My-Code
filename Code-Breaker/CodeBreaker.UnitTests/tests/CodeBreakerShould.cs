@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
-namespace CodeBreaker.UnitTests.tests
+namespace CodeBreaker.UnitTests
 {
     [TestFixture]
     public class CodeBerakerShould
@@ -41,7 +41,7 @@ namespace CodeBreaker.UnitTests.tests
         }
 
         private static readonly object[] CheckForCorrectGuessWithVariableGuessLengthCases =
-{
+        {
             new object[] {"bbbbb", new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }},
             new object[] {"bbb",  new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }},
 

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBreaker.UnitTests.src;
 
 namespace CodeBreaker.UnitTests
 {
     public class CodeBreaker
     {
-        private readonly List<Colour> _code;
+        private List<Colour> _code;
 
         public CodeBreaker() {
             _code = new List<Colour> { Colour.Red, Colour.Green, Colour.Yellow, Colour.Cyan };
@@ -44,5 +43,5 @@ namespace CodeBreaker.UnitTests
             }
             return mark;
         }
-    }
+    } 
 }

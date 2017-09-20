@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.UnitTests.src
+﻿namespace CodeBreaker.UnitTests
 {
     public enum Peg
     {
