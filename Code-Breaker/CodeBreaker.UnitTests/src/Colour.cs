@@ -1,7 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-using CodeBreaker.UnitTests;
-
-namespace CodeBreaker.UnitTests
+﻿namespace CodeBreaker.UnitTests
 {
     public enum Colour
     {

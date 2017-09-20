@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodeBreaker.UnitTests.src
+﻿namespace CodeBreaker.UnitTests.src
 {
     public enum Peg
     {
@@ -16,15 +10,7 @@ namespace CodeBreaker.UnitTests.src
     {
         public static string ToPegString(this Peg peg)
         {
-            switch (peg)
-            {
-                case Peg.Black:
-                    return "b";
-                case Peg.White:
-                    return "w";
-                default:
-                    return "No Enum String Assigned!";
-            }
+            return ((char)peg).ToString();
         }
     }
 }
