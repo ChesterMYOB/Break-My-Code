@@ -11,7 +11,6 @@
         Pink = 'p',
         Violet = 'v',
         Brown = 'b',
-        Gold = 'g',
         Silver = 's',
         Orange = 'o',
         White = 'w'

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
@@ -53,9 +54,10 @@ namespace CodeBreaker.UnitTests
         public void CheckForCorrectGuess_WithVariableGuessLengths(string expected, List<Colour> guess, List<Colour> code)
         {
             var codeBreaker = new CodeBreaker(code);
+            var copyOfGuess = guess.ToList();
             var mark = codeBreaker.CheckGuess(guess);
-            Assert.AreEqual(expected, mark);
-            mark = codeBreaker.CheckGuess(guess);
+            Assert.AreEqual(expected, mark);          
+            mark = codeBreaker.CheckGuess(copyOfGuess);
             Assert.AreEqual(expected, mark);
         }
 

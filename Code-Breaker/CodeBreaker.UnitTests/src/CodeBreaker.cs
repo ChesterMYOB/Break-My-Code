@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeBreaker.UnitTests
 {
     public class CodeBreaker
     {
         private List<Colour> _code;
-        private List<Colour> _codeWithoutColourAndPositionMatches;
-        private List<Colour> _guessWithoutColourAndPositionMatches;
+        private List<Colour> _restoreCode;
+        private List<Colour> _guess;
+
 
         public CodeBreaker()
         {
@@ -32,32 +34,32 @@ namespace CodeBreaker.UnitTests
             if (guess.Count != _code.Count)
                 throw new ArgumentException("Guess length does not match code length");
 
+            _guess = guess.ToList();
 
-            var mark = GetMark(guess);
+            _restoreCode = _code.ToList();
+            var mark = GetMark();
+            _code = _restoreCode;
 
             return mark;
         }
 
-        private string GetMark(List<Colour> guess)
+        private string GetMark()
         {
-            _codeWithoutColourAndPositionMatches = new List<Colour>();
-            _guessWithoutColourAndPositionMatches = new List<Colour>();
-            return CheckMatchingColourAndPosition(guess) + CheckOnlyMatchingColour();
+            var blackMarks = CheckMatchingColourAndPosition();
+            var whiteMarks = CheckOnlyMatchingColour();
+            return blackMarks + whiteMarks;
         }
 
-        private string CheckMatchingColourAndPosition(List<Colour> guess)
+        private string CheckMatchingColourAndPosition()
         {
             var marks = "";
-            for (var position = 0; position < guess.Count; position++)
+            for (var position = _code.Count - 1; position >= 0; position--)
             {
-                if (guess[position].Equals(_code[position]))
+                if (_guess[position].Equals(_code[position]))
                 {
                     marks += AddBlackMark();
-                }
-                else
-                {
-                    _codeWithoutColourAndPositionMatches.Add(_code[position]);
-                    _guessWithoutColourAndPositionMatches.Add(guess[position]);
+                    _code.Remove(_code[position]);
+                    _guess.Remove(_guess[position]);
                 }
             }
             return marks;
@@ -65,12 +67,9 @@ namespace CodeBreaker.UnitTests
         private string CheckOnlyMatchingColour()
         {
             var marks = "";
-            foreach (var c in _guessWithoutColourAndPositionMatches)
+            foreach (var c in _guess)
             {
-                if (_codeWithoutColourAndPositionMatches.Contains(c))
-                {
-                    marks += AddWhiteMark();
-                }
+                if (_code.Contains(c))  marks += AddWhiteMark();
             }
             return marks;
         }
