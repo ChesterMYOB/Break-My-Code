@@ -11,7 +11,7 @@ namespace CodeBreaker.UnitTests
         private static readonly object[] CheckForCorrectGuessCases =
         {
             new object[] {"", Colour.White, Colour.White, Colour.White, Colour.White},
-            new object[] {"bbww", Colour.Red, Colour.Cyan, Colour.Yellow, Colour.Green},
+            new object[] {"bbww", Colour.Red, Colour.Cyan, Colour.Yellow, Colour.Green}, 
             new object[] {"b", Colour.Red, Colour.Red, Colour.White, Colour.White},
 
             new object[] {"w", Colour.White, Colour.White, Colour.Red, Colour.White},
@@ -33,6 +33,7 @@ namespace CodeBreaker.UnitTests
         };
 
         [Test, TestCaseSource(nameof(CheckForCorrectGuessCases))]
+        [TestCaseSource(nameof(CheckForCorrectGuessCases))]
         public void CheckForCorrectGuess(string expected, Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
         {
             var codeBreaker = new CodeBreaker();
@@ -44,7 +45,8 @@ namespace CodeBreaker.UnitTests
         {
             new object[] {"bbbbb", new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan, Colour.Cyan, Colour.Red }},
             new object[] {"bbb",  new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }, new List<Colour> { Colour.Green, Colour.Green, Colour.Cyan }},
-
+            new object[] {"b",  new List<Colour> { Colour.Yellow, Colour.Yellow, Colour.Green, Colour.White }, new List<Colour> { Colour.Cyan, Colour.Yellow, Colour.Indigo, Colour.Red }},
+            new object[] {"b", new List<Colour> { Colour.Cyan, Colour.Yellow, Colour.Indigo, Colour.Red }, new List<Colour> { Colour.Yellow, Colour.Yellow, Colour.Green, Colour.White } }
         };
 
         [Test, TestCaseSource(nameof(CheckForCorrectGuessWithVariableGuessLengthCases))]
@@ -52,6 +54,8 @@ namespace CodeBreaker.UnitTests
         {
             var codeBreaker = new CodeBreaker(code);
             var mark = codeBreaker.CheckGuess(guess);
+            Assert.AreEqual(expected, mark);
+            mark = codeBreaker.CheckGuess(guess);
             Assert.AreEqual(expected, mark);
         }
 

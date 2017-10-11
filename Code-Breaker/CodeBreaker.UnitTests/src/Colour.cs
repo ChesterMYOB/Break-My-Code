@@ -2,11 +2,18 @@
 {
     public enum Colour
     {
-        Empty = -1, // Is it okay to have an empty enum?
+        Empty = '-',
         Red = 'r',
         Green = 'g',
         Yellow = 'y',
         Cyan = 'c',
+        Indigo = 'i',
+        Pink = 'p',
+        Violet = 'v',
+        Brown = 'b',
+        Gold = 'g',
+        Silver = 's',
+        Orange = 'o',
         White = 'w'
     }
 }
