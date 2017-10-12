@@ -2,7 +2,6 @@
 {
     public enum Colour
     {
-        Empty = '-',
         Red = 'r',
         Green = 'g',
         Yellow = 'y',

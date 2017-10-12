@@ -28,9 +28,6 @@ namespace CodeBreaker.UnitTests
 
         public string CheckGuess(List<Colour> guess)
         {
-            if (guess.Contains(Colour.Empty))
-                throw new ArgumentException("Cannot have an empty colour in guess");
-
             if (guess.Count != _code.Count)
                 throw new ArgumentException("Guess length does not match code length");
 

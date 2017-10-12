@@ -68,13 +68,5 @@ namespace CodeBreaker.UnitTests
             var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Red }));
             Assert.That(exception.Message, Is.EqualTo("Guess length does not match code length"));
         }
-
-        [Test]
-        public void ThrowArgumentExceptionWithCorrectMessage_WhenGuessLengthContainsEmpty()
-        {
-            var codeBreaker = new CodeBreaker();
-            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Red, Colour.Empty }));
-            Assert.That(exception.Message, Is.EqualTo("Cannot have an empty colour in guess"));
-        }
     }
 }
