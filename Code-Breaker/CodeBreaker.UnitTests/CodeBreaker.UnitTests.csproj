@@ -8,7 +8,7 @@
     <ProjectGuid>{C39E1A9E-2FCC-48C1-B126-39772F0EFED1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeBreaker.UnitTests</RootNamespace>
+    <RootNamespace>CodeBreaker</RootNamespace>
     <AssemblyName>CodeBreaker.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -12,7 +12,7 @@ namespace CodeBreaker.UnitTests
         private static readonly object[] CheckForCorrectGuessCases =
         {
             new object[] {"", Colour.White, Colour.White, Colour.White, Colour.White},
-            new object[] {"bbww", Colour.Red, Colour.Cyan, Colour.Yellow, Colour.Green}, 
+            new object[] {"bbww", Colour.Red, Colour.Cyan, Colour.Yellow, Colour.Green},
             new object[] {"b", Colour.Red, Colour.Red, Colour.White, Colour.White},
 
             new object[] {"w", Colour.White, Colour.White, Colour.Red, Colour.White},
@@ -38,7 +38,7 @@ namespace CodeBreaker.UnitTests
         public void CheckForCorrectGuess(string expected, Colour codeOne, Colour codeTwo, Colour codeThree, Colour codeFour)
         {
             var codeBreaker = new CodeBreaker();
-            var mark = codeBreaker.CheckGuess(new List<Colour> { codeOne, codeTwo, codeThree, codeFour });
+            var mark = codeBreaker.CheckGuess(new List<Colour> { Colour.Red, Colour.Green, Colour.Yellow, Colour.Cyan }, new List<Colour> { codeOne, codeTwo, codeThree, codeFour });
             Assert.AreEqual(expected, mark);
         }
 
@@ -53,11 +53,18 @@ namespace CodeBreaker.UnitTests
         [Test, TestCaseSource(nameof(CheckForCorrectGuessWithVariableGuessLengthCases))]
         public void CheckForCorrectGuess_WithVariableGuessLengths(string expected, List<Colour> guess, List<Colour> code)
         {
-            var codeBreaker = new CodeBreaker(code);
-            var copyOfGuess = guess.ToList();
-            var mark = codeBreaker.CheckGuess(guess);
-            Assert.AreEqual(expected, mark);          
-            mark = codeBreaker.CheckGuess(copyOfGuess);
+            var codeBreaker = new CodeBreaker();
+            var mark = codeBreaker.CheckGuess(code, guess);
+            Assert.AreEqual(expected, mark);
+        }
+
+        [Test, TestCaseSource(nameof(CheckForCorrectGuessWithVariableGuessLengthCases))]
+        public void CheckGuess_CanCheckTwice(string expected, List<Colour> guess, List<Colour> code)
+        {
+            var codeBreaker = new CodeBreaker();
+            var mark = codeBreaker.CheckGuess(code, guess);
+            Assert.AreEqual(expected, mark);
+            mark = codeBreaker.CheckGuess(code, guess);
             Assert.AreEqual(expected, mark);
         }
 
@@ -65,7 +72,7 @@ namespace CodeBreaker.UnitTests
         public void ThrowArgumentExceptionWithCorrectMessage_WhenGuessLengthDoesNotMatchCodeLength()
         {
             var codeBreaker = new CodeBreaker();
-            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Red }));
+            var exception = Assert.Throws<ArgumentException>(() => codeBreaker.CheckGuess(new List<Colour> { Colour.Brown, Colour.Brown }, new List<Colour> { Colour.Red }));
             Assert.That(exception.Message, Is.EqualTo("Guess length does not match code length"));
         }
     }
